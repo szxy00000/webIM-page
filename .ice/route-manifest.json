@@ -1,0 +1,32 @@
+[
+  {
+    "index": true,
+    "id": "index",
+    "file": "index.tsx",
+    "componentName": "index",
+    "layout": false,
+    "exports": [
+      "default"
+    ]
+  },
+  {
+    "path": "list",
+    "id": "list",
+    "file": "list.tsx",
+    "componentName": "list",
+    "layout": false,
+    "exports": [
+      "default"
+    ]
+  },
+  {
+    "path": "text",
+    "id": "text",
+    "file": "text.tsx",
+    "componentName": "text",
+    "layout": false,
+    "exports": [
+      "default"
+    ]
+  }
+]

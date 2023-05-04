@@ -5,6 +5,8 @@ import style from './index.module.css';
 import { io } from "socket.io-client";
 import Text from './text';
 import List from './list';
+import { ListProps } from './list';
+import axios from 'axios';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -17,16 +19,19 @@ const App: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<ListProps[]>([]);
   useEffect(() => {
     // fetch('http://localhost:7002/user/asdasd').then(res => res.json()).then(console.log)
+    axios.get('http://localhost:7777/chatHistory').then(res => res.data).then(setList)
     socket.on("sync", (arg) => {
-      setList(arg.map(one => ({ ...one, isMine: one.user.id === userId })))
+      setList(pre => {
+        return pre.concat([{ ...arg, isMine: arg.user.id === userId }])
+      })
     });
   }, [])
 
   const onChat = (content: string) => {
-    socket.emit('chat', {
+    axios.post('http://localhost:7777/chat', {
       user: {
         id: userId,
         nick: '匿名用户',

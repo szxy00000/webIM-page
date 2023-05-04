@@ -14,7 +14,7 @@ const Text: React.FC<TextProps> = props => {
       rows={3}
       placeholder="You can use @ to ref user here"
       onKeyDown={(e: any) => {
-        if (e.ctrlKey && e.keyCode === 13) {
+        if (e.keyCode === 13) {
           props.onChat(e.target.value)
         }
       }}

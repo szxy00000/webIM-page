@@ -17,7 +17,7 @@ import style from './index.module.css';
 //   content: 'sadasd11asdas',
 //   isMine: true
 // }]
-interface ListProps {
+export interface ListProps {
   list: {
     user: {
       nick: string;

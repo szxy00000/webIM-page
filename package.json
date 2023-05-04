@@ -6,6 +6,7 @@
     "@ant-design/icons": "^5.0.1",
     "@ice/runtime": "^1.0.0",
     "antd": "^5.4.6",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "socket.io-client": "^4.6.1"

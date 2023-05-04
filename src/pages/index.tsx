@@ -21,7 +21,6 @@ const App: React.FC = () => {
 
   const [list, setList] = useState<ListProps[]>([]);
   useEffect(() => {
-    // fetch('http://localhost:7002/user/asdasd').then(res => res.json()).then(console.log)
     axios.get('http://localhost:7777/chatHistory').then(res => res.data).then(setList)
     socket.on("sync", (arg) => {
       setList(pre => {

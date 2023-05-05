@@ -5,8 +5,8 @@ import style from './index.module.css';
 import { io } from "socket.io-client";
 import Text from './text';
 import List from './list';
-import { ListProps } from './list';
-import axios from 'axios';
+import { ListType } from './list';
+import { chatMsg, syncMsg } from '@/services';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -19,9 +19,9 @@ const App: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const [list, setList] = useState<ListProps[]>([]);
+  const [list, setList] = useState<ListType[]>([]);
   useEffect(() => {
-    axios.get('http://localhost:7777/chatHistory').then(res => res.data).then(setList)
+    syncMsg().then(setList);
     socket.on("sync", (arg) => {
       setList(pre => {
         return pre.concat([{ ...arg, isMine: arg.user.id === userId }])
@@ -29,16 +29,7 @@ const App: React.FC = () => {
     });
   }, [])
 
-  const onChat = (content: string) => {
-    axios.post('http://localhost:7777/chat', {
-      user: {
-        id: userId,
-        nick: '匿名用户',
-        icon: 'https://img.alicdn.com/imgextra/i4/O1CN01JGYv9V1s1rBNshgTz_!!6000000005707-0-tps-1170-874.jpg'
-      },
-      content
-    })
-  }
+  const onChat = content => chatMsg(content, userId) 
 
   return (
     <Layout className={style.layout}>

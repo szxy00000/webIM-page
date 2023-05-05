@@ -17,14 +17,17 @@ import style from './index.module.css';
 //   content: 'sadasd11asdas',
 //   isMine: true
 // }]
-export interface ListProps {
-  list: {
-    user: {
-      nick: string;
-      icon: string;
-    },
-    content: string;
-  }[];
+
+export interface ListType {
+  user: {
+    nick: string;
+    icon: string;
+  },
+  content: string;
+}
+
+interface ListProps {
+  list: ListType[];
 }
 const List: React.FC<ListProps> = (props) => {
   return (

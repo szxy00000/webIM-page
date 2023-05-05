@@ -21,7 +21,7 @@ const App: React.FC = () => {
 
   const [list, setList] = useState<ListProps[]>([]);
   useEffect(() => {
-    axios.get('http://localhost:7777/chatHistory').then(res => res.data).then(setList)
+    axios.get(`http://localhost:7777/chatHistory?query=${encodeURIComponent('{list{content user{nick icon}}}')}`).then(res => res.data.data.list).then(setList)
     socket.on("sync", (arg) => {
       setList(pre => {
         return pre.concat([{ ...arg, isMine: arg.user.id === userId }])

@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const userId = +new Date();
-
 export const chatMsg = (content: string, userId: number) => {
     axios.post('http://localhost:7777/chat', {
       user: {
@@ -14,5 +12,5 @@ export const chatMsg = (content: string, userId: number) => {
 }
 
 export const syncMsg = () => {
-    return axios.get('http://localhost:7777/chatHistory').then(res => res.data)
+    return axios.get(`http://localhost:7777/chatHistory?query=${encodeURIComponent('{list{content user{nick icon}}}')}`).then(res => res.data.data.list)
 }
